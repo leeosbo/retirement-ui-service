@@ -1,0 +1,41 @@
+.header {
+  background-color: #053c5e;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 10px;
+  align-items: center;
+  height: 8vh;
+}
+
+.navHome {
+  padding: 10px;
+}
+
+.link {
+  margin: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.link.homeIcon {
+  font-size: 28px;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.navigation {
+  display: none;
+}
+
+.homeLogo {
+  height: 50px;
+  display: flex;
+}

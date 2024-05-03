@@ -1,0 +1,21 @@
+.link {
+  margin: 10px;
+  text-decoration: none;
+  color: #e1e0e0;
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.navigation {
+  display: block;
+  margin: 0px;
+}
+.desktop {
+  display: block;
+}

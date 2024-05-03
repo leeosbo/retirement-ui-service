@@ -1,0 +1,45 @@
+.loginForm {
+  min-height: fit-content;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputContainer {
+  min-width: 20vw;
+  padding: 10px;
+  display: flex;
+}
+
+.label {
+  padding: 20px;
+  margin: auto;
+}
+
+.labelElement {
+  padding: 5px;
+}
+
+.input {
+  padding: 5px;
+  min-width: 14vw;
+  margin: auto;
+}
+
+.inputElement {
+  padding: 5px;
+  text-align: center;
+}
+
+.buttonContainer {
+  margin: auto;
+}
+
+.loginButton {
+  min-width: 150px;
+  text-align: center;
+  border-radius: 25px;
+  padding: 10px;
+  cursor: pointer;
+  margin: 20px;
+}

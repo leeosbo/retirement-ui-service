@@ -1,0 +1,18 @@
+.body {
+  margin: 0;
+}
+
+.content {
+  min-height: calc(100vh - 20vh);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #8c8c8c80;
+  color: #dbdedf;
+  padding: 20px;
+}
+
+.content h2 {
+  color: #053c5e;
+  text-align: center;
+}

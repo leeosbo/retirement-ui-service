@@ -1,0 +1,19 @@
+.link {
+  margin: 10px 0px 10px 10px;
+  text-decoration: none;
+  color: #f4f1f1;
+  background-color: #16162f;
+  padding: 10px;
+  border-radius: 10px 10px;
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.top {
+  display: flex;
+  padding: 10px;
+  margin: auto;
+  align-items: center;
+}

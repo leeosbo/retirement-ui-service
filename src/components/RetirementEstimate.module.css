@@ -1,0 +1,28 @@
+.estimateContainer {
+  margin: 20px;
+  display: flex;
+  background-color: #110f0f82;
+  align-items: center;
+  box-shadow: 0px 1px 5px 0px;
+  border-radius: 25px;
+}
+
+.estimateDisplay {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  min-height: 21vh;
+  min-width: 35vw;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.displayRow {
+  padding: 10px;
+  flex-direction: row;
+}
+
+.title {
+  font-size: large;
+}
