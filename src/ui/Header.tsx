@@ -1,7 +1,6 @@
 'use client';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment } from 'react';
 import classes from './Header.module.css';
-// import MobileMenu from './MobileMenu';
 import NavMenu from './NavMenu';
 import Link from 'next/link';
 
@@ -14,7 +13,7 @@ const Header: React.FC = () => {
             <i className='fa fa-home'></i>
           </Link>
         </nav>
-        {<NavMenu largeScreen={true} />}
+        {<NavMenu />}
       </header>
     </Fragment>
   );
