@@ -1,48 +1,17 @@
 'use client';
 import FlexContainer from '@/components/FlexContainer';
 import IncomeSourceList from '@/components/IncomeSourceList';
-import { AuthContext } from '@/store/auth-context';
 import { PageContext } from '@/store/page-context';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { useCallback, useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import classes from '../../css/ListPages.module.css';
+import useAuthContext from '@/hooks/useAuthContext';
+import useIncomeSourceList from '@/hooks/useIncomeSourceList';
 
 const IncomeSources = () => {
-  const { basicAuthToken, userId } = useContext(AuthContext);
-  const { incomeSourceList, setIncomeSourceList } = useContext(PageContext);
-  const { loadIncomeSources, setLoadIncomeSources } = useContext(PageContext);
-
-  const getIncomeSources = useCallback(
-    async (id: number) => {
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_API_SERVICE_BASE_URL +
-          '/retirement/api/incomesources?user=' +
-          id,
-        {
-          headers: {
-            Authorization: basicAuthToken,
-          },
-        }
-      );
-
-      const data = await response.json();
-      console.log(data);
-      setIncomeSourceList(data);
-      setLoadIncomeSources(false);
-    },
-    [basicAuthToken, setIncomeSourceList, setLoadIncomeSources]
-  );
-
-  useEffect(() => {
-    if (basicAuthToken == '') {
-      redirect('/login');
-    }
-
-    if (loadIncomeSources) {
-      getIncomeSources(userId);
-    }
-  }, [basicAuthToken, getIncomeSources, userId, loadIncomeSources]);
+  const { incomeSourceList } = useContext(PageContext);
+  useAuthContext();
+  useIncomeSourceList();
 
   return (
     <FlexContainer>
@@ -56,4 +25,5 @@ const IncomeSources = () => {
     </FlexContainer>
   );
 };
+
 export default IncomeSources;

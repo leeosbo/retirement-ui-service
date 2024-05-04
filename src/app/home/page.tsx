@@ -1,16 +1,19 @@
 'use client';
 import RetirementEstimate, { Estimate } from '@/components/RetirementEstimate';
 import { AuthContext } from '@/store/auth-context';
-import { PageContext } from '@/store/page-context';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { useCallback, useContext, useEffect, useState } from 'react';
-import classes from './home.module.css';
 import FlexContainer from '@/components/FlexContainer';
+import SavingsProgress from '@/components/SavingsProgress';
+import useIncomeSourceList from '@/hooks/useIncomeSourceList';
+import useExpenseList from '@/hooks/useExpenseList';
+import useAuthContext from '@/hooks/useAuthContext';
 
 const Home = () => {
   const { basicAuthToken, userId } = useContext(AuthContext);
   const [estimate, setEstimate] = useState<Estimate>();
+  useAuthContext();
+  useIncomeSourceList();
+  useExpenseList();
 
   const getCurrentEstimate = useCallback(
     async (id: number) => {
@@ -32,20 +35,21 @@ const Home = () => {
   );
 
   useEffect(() => {
-    if (basicAuthToken == '') {
-      redirect('/login');
-    }
     if (userId != 0) {
       getCurrentEstimate(userId);
     }
-  }, [basicAuthToken, getCurrentEstimate, userId]);
+  }, [getCurrentEstimate, userId]);
 
   return (
     <>
-      <FlexContainer title='Home'>
-        <RetirementEstimate estimate={estimate}></RetirementEstimate>
-        <div className={classes.linksContainer}></div>
-      </FlexContainer>
+      {userId != 0 && (
+        <FlexContainer title='Home'>
+          <RetirementEstimate estimate={estimate}></RetirementEstimate>
+          {estimate != undefined && (
+            <SavingsProgress estimate={estimate}></SavingsProgress>
+          )}
+        </FlexContainer>
+      )}
     </>
   );
 };

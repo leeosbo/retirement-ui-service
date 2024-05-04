@@ -2,16 +2,15 @@
 import { useContext, useEffect, useState } from 'react';
 import classes from '../../login/login.module.css';
 import { AuthContext } from '@/store/auth-context';
-import { IncomeSource } from '@/components/IncomeSourceList';
 import { PageContext } from '@/store/page-context';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { Expense } from '@/components/ExpenseList';
+import useAuthContext from '@/hooks/useAuthContext';
 
 const AddNewExpenseForm = () => {
-  const authContext = useContext(AuthContext);
   const { setLoadExpenses } = useContext(PageContext);
-  const { basicAuthToken, userId } = authContext;
+  const { basicAuthToken, userId } = useContext(AuthContext);
   const [backToExpenseList, setBackToExpenseList] = useState<boolean>(false);
   const [expense, setExpense] = useState<Expense>({
     id: 0,
@@ -21,14 +20,13 @@ const AddNewExpenseForm = () => {
     frequencyPerYear: 0,
   });
 
+  useAuthContext();
+
   useEffect(() => {
-    if (basicAuthToken == '') {
-      redirect('/home');
-    }
     if (backToExpenseList) {
       redirect('/expenses');
     }
-  }, [basicAuthToken, backToExpenseList]);
+  }, [backToExpenseList]);
 
   const changeHandler = (event: any) => {
     const name = event.target.name;

@@ -1,22 +1,17 @@
 'use client';
 import { AuthContext } from '@/store/auth-context';
-import { redirect } from 'next/navigation';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import classes from '../../css/InputForms.module.css';
 import FlexContainer from '@/components/FlexContainer';
+import useAuthContext from '@/hooks/useAuthContext';
+import Link from 'next/link';
 
 const Logout = () => {
-  const { basicAuthToken, setBasicAuthToken } = useContext(AuthContext);
-
-  useEffect(() => {
-    if (basicAuthToken == '') {
-      redirect('/login');
-    }
-  }, [basicAuthToken]);
+  const { setBasicAuthToken } = useContext(AuthContext);
+  useAuthContext();
 
   const logoutHandler = () => {
     setBasicAuthToken('');
-    redirect('/login');
   };
 
   return (
@@ -28,6 +23,9 @@ const Logout = () => {
         <div className={classes.buttonsContainer}>
           <button onClick={logoutHandler} className={classes.button}>
             Logout
+          </button>
+          <button className={classes.button}>
+            <Link href={`/home`}>Cancel</Link>
           </button>
         </div>
       </div>

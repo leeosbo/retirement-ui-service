@@ -6,11 +6,11 @@ import { IncomeSource } from '@/components/IncomeSourceList';
 import { PageContext } from '@/store/page-context';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import useAuthContext from '@/hooks/useAuthContext';
 
 const AddNewIncomeSourceForm = () => {
-  const authContext = useContext(AuthContext);
   const { setLoadIncomeSources } = useContext(PageContext);
-  const { basicAuthToken, userId } = authContext;
+  const { basicAuthToken, userId } = useContext(AuthContext);
   const [backToIncomeSourceList, setBackToIncomeSourceList] =
     useState<boolean>(false);
   const [incomeSource, setIncomeSource] = useState<IncomeSource>({
@@ -22,10 +22,9 @@ const AddNewIncomeSourceForm = () => {
     returnFrequency: 0,
   });
 
+  useAuthContext();
+
   useEffect(() => {
-    if (basicAuthToken == '') {
-      redirect('/home');
-    }
     if (backToIncomeSourceList) {
       redirect('/incomesources');
     }

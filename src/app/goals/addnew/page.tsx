@@ -6,11 +6,11 @@ import { PageContext } from '@/store/page-context';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { Goal } from '@/components/GoalList';
+import useAuthContext from '@/hooks/useAuthContext';
 
 const AddNewGoalForm = () => {
-  const authContext = useContext(AuthContext);
   const { setLoadGoals } = useContext(PageContext);
-  const { basicAuthToken, userId } = authContext;
+  const { basicAuthToken, userId } = useContext(AuthContext);
   const [backToGoalList, setBackToGoalList] = useState<boolean>(false);
   const [goal, setGoal] = useState<Goal>({
     id: 0,
@@ -21,14 +21,13 @@ const AddNewGoalForm = () => {
     primaryGoal: 'false',
   });
 
+  useAuthContext();
+
   useEffect(() => {
-    if (basicAuthToken == '') {
-      redirect('/home');
-    }
     if (backToGoalList) {
       redirect('/goals');
     }
-  }, [basicAuthToken, backToGoalList]);
+  }, [backToGoalList]);
 
   const changeHandler = (event: any) => {
     const name = event.target.name;

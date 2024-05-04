@@ -4,14 +4,20 @@ export type Estimate = {
   userId: number | string;
   monthlyIncomeAvailable: number | string;
   monthlyExpenses: number | string;
-  monthlyDisposable: number | string;
+  monthlyDisposable: number;
+  onTrack: boolean;
+  monthlyToSave: number;
+  totalAdditionalSavings: number;
 };
 
 const loadingEstimate: Estimate = {
   userId: '',
   monthlyIncomeAvailable: '',
   monthlyExpenses: '',
-  monthlyDisposable: '',
+  monthlyDisposable: 0,
+  onTrack: true,
+  monthlyToSave: 0,
+  totalAdditionalSavings: 0,
 };
 
 const RetirementEstimate: React.FC<{ estimate?: Estimate }> = ({

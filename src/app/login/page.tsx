@@ -47,7 +47,7 @@ const Login = () => {
       } else if (response.status == 401) {
         // failed authentication
         setFailedLogin(true);
-        setErrorMessage('*Invalid Credentials Provided');
+        setErrorMessage('* Invalid Credentials Provided');
       } else {
         // system issue
         setErrorMessage(

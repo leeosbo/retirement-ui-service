@@ -2,46 +2,17 @@
 
 import ExpenseList from '@/components/ExpenseList';
 import FlexContainer from '@/components/FlexContainer';
-import { AuthContext } from '@/store/auth-context';
 import { PageContext } from '@/store/page-context';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { useCallback, useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import classes from '../../css/ListPages.module.css';
+import useAuthContext from '@/hooks/useAuthContext';
+import useExpenseList from '@/hooks/useExpenseList';
 
 const Expenses = () => {
-  const { loadExpenses, setLoadExpenses } = useContext(PageContext);
-  const { basicAuthToken, userId } = useContext(AuthContext);
-  const { expenseList, setExpenseList } = useContext(PageContext);
-
-  const getExpenses = useCallback(
-    async (id: number) => {
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_API_SERVICE_BASE_URL +
-          '/retirement/api/expenses?user=' +
-          id,
-        {
-          headers: {
-            Authorization: basicAuthToken,
-          },
-        }
-      );
-
-      const expenses = await response.json();
-      setExpenseList(expenses);
-      setLoadExpenses(false);
-    },
-    [basicAuthToken, setExpenseList, setLoadExpenses]
-  );
-
-  useEffect(() => {
-    if (basicAuthToken == '') {
-      redirect('/login');
-    }
-    if (loadExpenses) {
-      getExpenses(userId);
-    }
-  }, [basicAuthToken, getExpenses, userId, loadExpenses]);
+  const { expenseList } = useContext(PageContext);
+  useAuthContext();
+  useExpenseList();
 
   return (
     <FlexContainer>

@@ -2,46 +2,18 @@
 
 import FlexContainer from '@/components/FlexContainer';
 import GoalList from '@/components/GoalList';
-import { AuthContext } from '@/store/auth-context';
 import { PageContext } from '@/store/page-context';
-import { redirect } from 'next/navigation';
-import { useCallback, useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import classes from '../../css/ListPages.module.css';
 import Link from 'next/link';
+import useGoalList from '@/hooks/useGoalList';
+import useAuthContext from '@/hooks/useAuthContext';
 
 const Goals = () => {
-  const { loadGoals, setLoadGoals } = useContext(PageContext);
-  const { basicAuthToken, userId } = useContext(AuthContext);
-  const { goalList, setGoalList } = useContext(PageContext);
+  const { goalList } = useContext(PageContext);
 
-  const getGoals = useCallback(
-    async (id: number) => {
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_API_SERVICE_BASE_URL +
-          '/retirement/api/goals?user=' +
-          id,
-        {
-          headers: {
-            Authorization: basicAuthToken,
-          },
-        }
-      );
-
-      const goals = await response.json();
-      setGoalList(goals);
-      setLoadGoals(false);
-    },
-    [basicAuthToken, setGoalList, setLoadGoals]
-  );
-
-  useEffect(() => {
-    if (basicAuthToken == '') {
-      redirect('/login');
-    }
-    if (loadGoals) {
-      getGoals(userId);
-    }
-  }, [basicAuthToken, getGoals, userId, loadGoals]);
+  useAuthContext();
+  useGoalList();
 
   return (
     <FlexContainer>

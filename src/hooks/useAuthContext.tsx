@@ -5,7 +5,7 @@ import { useContext, useEffect } from 'react';
 
 const useAuthContext: () => void = () => {
   const authContext = useContext(AuthContext);
-  const { basicAuthToken, setBasicAuthToken } = authContext;
+  const { basicAuthToken } = authContext;
 
   useEffect(() => {
     if (basicAuthToken == '') {
