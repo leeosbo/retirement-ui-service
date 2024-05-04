@@ -9,7 +9,10 @@ const Header: React.FC = () => {
     <Fragment>
       <header className={classes.header}>
         <nav className={classes.navHome}>
-          <Link href={`/`} className={`${classes.link} ${classes.homeIcon}`}>
+          <Link
+            href={`/home`}
+            className={`${classes.link} ${classes.homeIcon}`}
+          >
             <i className='fa fa-home'></i>
           </Link>
         </nav>

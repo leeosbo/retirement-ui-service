@@ -33,7 +33,7 @@ const NavMenu: React.FC<{
           Goals
         </Link>
         <Link
-          href={`/`}
+          href={`/home`}
           className={`${classes.link}`}
           onClick={props.onClickHandler}
         >
