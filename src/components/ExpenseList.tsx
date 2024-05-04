@@ -3,8 +3,8 @@ import classes from './DetailList.module.css';
 import EditModal, { IUpdateable } from './EditModal';
 import { AuthContext } from '@/store/auth-context';
 import { PageContext } from '@/store/page-context';
-import Link from 'next/link';
 import DeleteModal, { IDeleteable } from './DeleteModal';
+import { useCurrencyFormatter } from '@/hooks/useNumberFormatters';
 
 export type Expense = {
   id: number;
@@ -21,6 +21,7 @@ const ExpenseList: React.FC<{ expenseList: Expense[] }> = ({ expenseList }) => {
   const [updateable, setUpdateable] = useState<IUpdateable<Expense>>();
   const [deleteable, setDeleteable] = useState<IDeleteable<Expense>>();
   const [deleting, setDeleting] = useState<boolean>(false);
+  const currencyFormatter = useCurrencyFormatter();
 
   const editHandler = (id: number) => {
     const expense = expenseList.find((exp) => exp.id == id);
@@ -110,7 +111,9 @@ const ExpenseList: React.FC<{ expenseList: Expense[] }> = ({ expenseList }) => {
           </div>
           <div className={classes.detailRow}>
             <div className={classes.name}>Balance: </div>
-            <div className={classes.value}>{item.amount}</div>
+            <div className={classes.value}>
+              {currencyFormatter.format(item.amount)}
+            </div>
           </div>
           <div className={classes.detailRow}>
             <div className={classes.name}>Frequency: </div>

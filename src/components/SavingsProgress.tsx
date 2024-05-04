@@ -4,10 +4,12 @@ import { PageContext } from '@/store/page-context';
 import useGoalList from '@/hooks/useGoalList';
 import { Estimate } from './RetirementEstimate';
 import { Goal } from './GoalList';
+import { useCurrencyFormatter } from '@/hooks/useNumberFormatters';
 
 const SavingsProgress: React.FC<{ estimate: Estimate }> = ({ estimate }) => {
   const { goalList, loadGoals } = useContext(PageContext);
   const [primaryGoal, setPrimaryGoal] = useState<Goal>();
+  const currencyFormatter = useCurrencyFormatter();
 
   const getPrimaryGoal = useCallback(() => {
     if (!loadGoals) {
@@ -37,7 +39,9 @@ const SavingsProgress: React.FC<{ estimate: Estimate }> = ({ estimate }) => {
         <span className={classes.displayRow}>
           <label>Primary Goal: </label>
 
-          <span>{primaryGoal?.disposableIncome}</span>
+          <span>
+            {currencyFormatter.format(primaryGoal?.disposableIncome || 0)}
+          </span>
         </span>
         <span className={classes.displayRow}>
           <label>Frequency Per Year: </label>
@@ -51,7 +55,9 @@ const SavingsProgress: React.FC<{ estimate: Estimate }> = ({ estimate }) => {
         )}
         {!onTrack && (
           <span className={classes.displayRow}>
-            <span>{`You need to save ${estimate.monthlyToSave} more per month!`}</span>
+            <span>{`You need to save ${currencyFormatter.format(
+              estimate.monthlyToSave
+            )} more per month!`}</span>
           </span>
         )}
       </div>

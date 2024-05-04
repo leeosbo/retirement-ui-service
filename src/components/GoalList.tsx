@@ -4,6 +4,7 @@ import { AuthContext } from '@/store/auth-context';
 import { PageContext } from '@/store/page-context';
 import EditModal, { IUpdateable } from './EditModal';
 import DeleteModal, { IDeleteable } from './DeleteModal';
+import { useCurrencyFormatter } from '@/hooks/useNumberFormatters';
 
 export type Goal = {
   id: number;
@@ -21,6 +22,7 @@ const GoalList: React.FC<{ goalList: Goal[] }> = ({ goalList }) => {
   const [updateable, setUpdateable] = useState<IUpdateable<Goal>>();
   const [deleteable, setDeleteable] = useState<IDeleteable<Goal>>();
   const [deleting, setDeleting] = useState<boolean>(false);
+  const currencyFormatter = useCurrencyFormatter();
 
   const editHandler = (id: number) => {
     const goal = goalList.find((goal) => goal.id == id);
@@ -110,7 +112,9 @@ const GoalList: React.FC<{ goalList: Goal[] }> = ({ goalList }) => {
           </div>
           <div className={classes.detailRow}>
             <div className={classes.name}>Disposable Income: </div>
-            <div className={classes.value}>{item.disposableIncome}</div>
+            <div className={classes.value}>
+              {currencyFormatter.format(item.disposableIncome)}
+            </div>
           </div>
           <div className={classes.detailRow}>
             <div className={classes.name}>Frequency Per Year: </div>

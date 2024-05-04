@@ -1,9 +1,10 @@
 import classes from './RetirementEstimate.module.css';
+import { useCurrencyFormatter } from '@/hooks/useNumberFormatters';
 
 export type Estimate = {
-  userId: number | string;
-  monthlyIncomeAvailable: number | string;
-  monthlyExpenses: number | string;
+  userId: number;
+  monthlyIncomeAvailable: number;
+  monthlyExpenses: number;
   monthlyDisposable: number;
   onTrack: boolean;
   monthlyToSave: number;
@@ -11,9 +12,9 @@ export type Estimate = {
 };
 
 const loadingEstimate: Estimate = {
-  userId: '',
-  monthlyIncomeAvailable: '',
-  monthlyExpenses: '',
+  userId: 0,
+  monthlyIncomeAvailable: 0,
+  monthlyExpenses: 0,
   monthlyDisposable: 0,
   onTrack: true,
   monthlyToSave: 0,
@@ -27,6 +28,7 @@ const RetirementEstimate: React.FC<{ estimate?: Estimate }> = ({
   const estimateToDisplay: Estimate = estimateUndefined
     ? loadingEstimate
     : estimate;
+  const currencyFormatter = useCurrencyFormatter();
 
   return (
     <div className={classes.estimateContainer}>
@@ -37,17 +39,23 @@ const RetirementEstimate: React.FC<{ estimate?: Estimate }> = ({
         <span className={classes.displayRow}>
           <label>Monthly Income Available: </label>
 
-          <span>{estimateToDisplay.monthlyIncomeAvailable}</span>
+          <span>
+            {currencyFormatter.format(estimateToDisplay.monthlyIncomeAvailable)}
+          </span>
         </span>
         <span className={classes.displayRow}>
           <label>Monthly Expenses: </label>
 
-          <span>{estimateToDisplay.monthlyExpenses}</span>
+          <span>
+            {currencyFormatter.format(estimateToDisplay.monthlyExpenses)}
+          </span>
         </span>
         <span className={classes.displayRow}>
           <label>Disposable Income: </label>
 
-          <span>{estimateToDisplay.monthlyDisposable}</span>
+          <span>
+            {currencyFormatter.format(estimateToDisplay.monthlyDisposable)}
+          </span>
         </span>
       </div>
     </div>

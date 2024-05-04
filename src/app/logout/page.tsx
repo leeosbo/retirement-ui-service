@@ -5,12 +5,18 @@ import classes from '../../css/InputForms.module.css';
 import FlexContainer from '@/components/FlexContainer';
 import useAuthContext from '@/hooks/useAuthContext';
 import Link from 'next/link';
+import { PageContext } from '@/store/page-context';
 
 const Logout = () => {
   const { setBasicAuthToken } = useContext(AuthContext);
+  const { setLoadIncomeSources, setLoadExpenses, setLoadGoals } =
+    useContext(PageContext);
   useAuthContext();
 
   const logoutHandler = () => {
+    setLoadIncomeSources(true);
+    setLoadExpenses(true);
+    setLoadGoals(true);
     setBasicAuthToken('');
   };
 

@@ -4,6 +4,10 @@ import EditModal, { IUpdateable } from './EditModal';
 import { AuthContext } from '@/store/auth-context';
 import { PageContext } from '@/store/page-context';
 import DeleteModal, { IDeleteable } from './DeleteModal';
+import {
+  useCurrencyFormatter,
+  usePercentFormatter,
+} from '@/hooks/useNumberFormatters';
 
 export type IncomeSource = {
   id: number;
@@ -23,6 +27,8 @@ const IncomeSourceList: React.FC<{ incomeSourceList: IncomeSource[] }> = ({
   const [updateable, setUpdateable] = useState<IUpdateable<IncomeSource>>();
   const [deleteable, setDeleteable] = useState<IDeleteable<IncomeSource>>();
   const [deleting, setDeleting] = useState<boolean>(false);
+  const currencyFormatter = useCurrencyFormatter();
+  const percentFormatter = usePercentFormatter();
 
   const editHandler = (id: number) => {
     const incomeSource = incomeSourceList.find((source) => source.id == id);
@@ -113,11 +119,15 @@ const IncomeSourceList: React.FC<{ incomeSourceList: IncomeSource[] }> = ({
           </div>
           <div className={classes.detailRow}>
             <div className={classes.name}>Balance: </div>
-            <div className={classes.value}>{item.accountBalance}</div>
+            <div className={classes.value}>
+              {currencyFormatter.format(item.accountBalance)}
+            </div>
           </div>
           <div className={classes.detailRow}>
             <div className={classes.name}>Return Rate: </div>
-            <div className={classes.value}>{item.returnRate}</div>
+            <div className={classes.value}>
+              {percentFormatter.format(item.returnRate / 100)}
+            </div>
           </div>
           <div className={classes.detailRow}>
             <div className={classes.name}>Return Frequency: </div>
