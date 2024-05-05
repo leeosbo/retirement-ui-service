@@ -105,9 +105,7 @@ const AddNewExpenseForm = () => {
         </div>
         <div className={classes.inputContainer}>
           <div className={classes.label}>
-            <label htmlFor='frequencyPerYear'>
-              Frequency of Expense Per Year
-            </label>
+            <label htmlFor='frequencyPerYear'>Frequency Per Year</label>
           </div>
           <div className={classes.input}>
             <input

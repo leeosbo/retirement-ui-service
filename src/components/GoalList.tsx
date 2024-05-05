@@ -120,6 +120,12 @@ const GoalList: React.FC<{ goalList: Goal[] }> = ({ goalList }) => {
             <div className={classes.name}>Frequency Per Year: </div>
             <div className={classes.value}>{item.frequency}</div>
           </div>
+          <div className={classes.detailRow}>
+            <div className={classes.name}>Primary: </div>
+            <div className={classes.value}>
+              {item.primaryGoal ? 'Yes' : 'No'}
+            </div>
+          </div>
         </div>
         <div className={classes.buttonsContainer}>
           <button

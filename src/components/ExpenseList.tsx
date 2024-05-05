@@ -110,13 +110,13 @@ const ExpenseList: React.FC<{ expenseList: Expense[] }> = ({ expenseList }) => {
             <div className={classes.name}>{item.name}</div>
           </div>
           <div className={classes.detailRow}>
-            <div className={classes.name}>Balance: </div>
+            <div className={classes.name}>Amount: </div>
             <div className={classes.value}>
               {currencyFormatter.format(item.amount)}
             </div>
           </div>
           <div className={classes.detailRow}>
-            <div className={classes.name}>Frequency: </div>
+            <div className={classes.name}>Frequency Per Year: </div>
             <div className={classes.value}>{item.frequencyPerYear}</div>
           </div>
         </div>
