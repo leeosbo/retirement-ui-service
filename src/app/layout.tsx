@@ -8,7 +8,7 @@ import PageContextProvider from '@/store/page-context';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Retirement Planning Home',
+  title: 'Retirement Planning',
   description: 'Retirement Planning System',
 };
 
