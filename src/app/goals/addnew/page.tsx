@@ -18,7 +18,8 @@ const AddNewGoalForm = () => {
     name: '',
     disposableIncome: 0,
     frequency: 0,
-    primaryGoal: 'false',
+    primaryGoal: false,
+    stringPrimaryGoal: 'false',
   });
 
   useAuthContext();
@@ -36,6 +37,12 @@ const AddNewGoalForm = () => {
   };
 
   const submitForm = async () => {
+    if (goal.stringPrimaryGoal == 'yes') {
+      goal.primaryGoal = true;
+    } else {
+      goal.primaryGoal = false;
+    }
+
     try {
       const response = await fetch(
         process.env.NEXT_PUBLIC_API_SERVICE_BASE_URL + '/retirement/api/goals',
@@ -122,19 +129,19 @@ const AddNewGoalForm = () => {
         </div>
         <div className={classes.inputContainer}>
           <div className={classes.label}>
-            <label htmlFor='primaryGoal'>Set as Primary Goal?</label>
+            <label htmlFor='stringPrimaryGoal'>Set as Primary Goal?</label>
           </div>
           <div className={classes.input}>
             <select
-              id='primaryGoal'
+              id='stringPrimaryGoal'
               className={classes.inputElement}
-              name='primaryGoal'
-              value={goal?.primaryGoal || 'FALSE'}
+              name='stringPrimaryGoal'
+              value={goal?.stringPrimaryGoal || 'no'}
               onChange={changeHandler}
               tabIndex={4}
             >
-              <option value='TRUE'>Yes</option>
-              <option value='FALSE'>No</option>
+              <option value='yes'>Yes</option>
+              <option value='no'>No</option>
             </select>
           </div>
         </div>

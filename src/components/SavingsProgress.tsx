@@ -13,9 +13,7 @@ const SavingsProgress: React.FC<{ estimate: Estimate }> = ({ estimate }) => {
 
   const getPrimaryGoal = useCallback(() => {
     if (!loadGoals) {
-      const fetchedPrimaryGoal = goalList.find(
-        (goal) => goal.primaryGoal != 'false'
-      );
+      const fetchedPrimaryGoal = goalList.find((goal) => goal.primaryGoal);
       setPrimaryGoal(fetchedPrimaryGoal);
     }
   }, [loadGoals, goalList]);

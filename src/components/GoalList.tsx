@@ -12,7 +12,8 @@ export type Goal = {
   name: string;
   disposableIncome: number;
   frequency: number;
-  primaryGoal: string;
+  primaryGoal: boolean;
+  stringPrimaryGoal: string;
 };
 
 const GoalList: React.FC<{ goalList: Goal[] }> = ({ goalList }) => {
