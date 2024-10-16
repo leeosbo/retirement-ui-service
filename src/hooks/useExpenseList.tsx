@@ -14,7 +14,7 @@ const useExpenseList: () => void = () => {
     async (id: number) => {
       const response = await fetch(
         process.env.NEXT_PUBLIC_API_SERVICE_BASE_URL +
-          '/retirement/api/expenses?user=' +
+          '/retirement/api/expenses?userId=' +
           id,
         {
           headers: {

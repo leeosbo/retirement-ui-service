@@ -14,7 +14,7 @@ const useIncomeSourceList: () => void = () => {
     async (id: number) => {
       const response = await fetch(
         process.env.NEXT_PUBLIC_API_SERVICE_BASE_URL +
-          '/retirement/api/incomesources?user=' +
+          '/retirement/api/incomesources?userId=' +
           id,
         {
           headers: {

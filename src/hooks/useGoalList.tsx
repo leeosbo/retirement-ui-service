@@ -13,7 +13,7 @@ const useGoalList: () => void = () => {
     async (id: number) => {
       const response = await fetch(
         process.env.NEXT_PUBLIC_API_SERVICE_BASE_URL +
-          '/retirement/api/goals?user=' +
+          '/retirement/api/goals?userId=' +
           id,
         {
           headers: {
